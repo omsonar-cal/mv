@@ -85,7 +85,7 @@ Unlike standard RAG systems, **MetaVault does not perform document retrieval or 
 - **Document-Level Metadata Aggregation & Deduplication** — Merges section-level summaries into a coherent executive summary, and classifies document topic, doc type (e.g., Proposal, Handbook, Report), and responsible department.
 - **Single-Vector Knowledge Indexing** — Synthesizes document summary, section titles, entities, and keywords into a dense vector embedding, indexed in Qdrant with a lightweight filtering payload. Full section trees, headers, and entity graphs are stored in PostgreSQL.
 - **Enterprise REST API (FastAPI)** — Fully asynchronous HTTP API providing document listing, hierarchical tree retrieval, section breakdown, and vector similarity search.
-- **Interactive Web Explorer & Agent UI** — Responsive frontend served via `/app`, featuring real-time document search, hierarchical tree visualizer, entity badges, and semantic agent retrieval previews.
+- **UI** — Responsive frontend served via `/app`, featuring real-time document search, hierarchical tree visualizer, entity badges, and semantic agent retrieval previews.
 - **Containerized Deployment** — Production-ready `Dockerfile` and `docker-compose.yml` orchestrating API, PostgreSQL, and Qdrant containers with automated health checks.
 
 ---
@@ -211,7 +211,7 @@ metavault/
 ### Prerequisites
 - **Python:** 3.10 or higher (if running locally without Docker)
 - **Docker:** Docker Desktop or Docker Engine + Docker Compose v2 (recommended)
-- **OpenAI API Key:** An active API key with access to GPT models and embedding endpoints
+- **GitHub Personal Access Token (PAT)** 
 
 ### Option A: One-Command Deployment (Docker Compose) — Recommended
 
@@ -220,9 +220,10 @@ The easiest way to launch the entire MetaVault stack (FastAPI backend, PostgreSQ
 1. **Configure environment variables:**
    Create a `.env` file in the root directory (or copy from `.env.example`):
    ```env
-   OPENAI_API_KEY=sk-your-openai-api-key-here
-   DATABASE_URL=postgresql://postgres:postgres@db:5432/metavault
-   QDRANT_URL=http://qdrant:6333
+   GITHUB_TOKEN= github_pat_11CGYKYPAxxxxxxxxxzsAhK_WdMW0xxxxxxx0sfUAjd1q
+   GITHUB_MODELS_BASE_URL= https://models.inference.ai.azure.com
+   DATABASE_URL= postgresql://postgres:postgres@db:5432/metavault
+   QDRANT_URL= http://qdrant:6333
    ```
 
 2. **Launch the container cluster:**
@@ -351,7 +352,6 @@ curl -X POST "http://localhost:8000/api/search" \
 
 - [ ] **Asynchronous Background Job Queue** — Integrate Celery + Redis for distributed, non-blocking batch document processing and webhook notifications.
 - [ ] **Multi-Parser & Format Expansion** — Add native support for `.pptx` (presentations), `.xlsx` (financial sheets), and `.html`/`.md` archives.
-- [ ] **Pluggable Open-Source LLMs** — Support local, privacy-focused inference using Ollama, vLLM, or HuggingFace endpoints (e.g., Llama-3.3, Mistral, Qwen) as alternatives to OpenAI.
 - [ ] **Enterprise Knowledge Graph Generation** — Automatically extract cross-document relationship triples (Subject → Predicate → Object) from GLiNER entity outputs and store them in Neo4j.
 - [ ] **Metadata Versioning & Audit Logs** — Track changes to document revisions and maintain historical metadata diffs in PostgreSQL.
 - [ ] **Role-Based Access Control (RBAC)** — Add enterprise authentication (OAuth2 / JWT) and department-level document filtering.
