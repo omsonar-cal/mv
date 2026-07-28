@@ -67,7 +67,7 @@ Unlike standard RAG systems, **MetaVault does not perform document retrieval or 
 | **AI Architecture** | Basic text-to-embedding models | Hybrid AI: deterministic layout scoring + GLiNER NLP + GPT-4.1 |
 | **Index Size & Speed** | Bloated vector index, slower queries | Ultra-compact vector footprint, sub-millisecond retrieval |
 
-1. **Metadata-First Architecture** — Retrieval systems should consume clean, structured metadata rather than raw, noisy OCR text.
+1. **Metadata-First Architecture** — Retrieval systems should consume clean, structured metadata rather than raw text.
 2. **One Embedding Per Document** — By embedding the aggregated metadata (summary, topic, keywords, key entities, section titles), vector storage requirements drop by 95%+ while semantic recall accuracy increases.
 3. **Structure-Aware Processing** — Documents are segmented along natural H1/H2/H3 boundaries. Each section represents a complete logical idea.
 4. **Hybrid AI Engine** — Combines deterministic layout parsing (Docling) and feature scoring with state-of-the-art NLP models (GLiNER for zero-shot entity extraction + OpenAI GPT-4.1 for semantic summarization and taxonomy classification).
